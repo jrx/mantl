@@ -1,0 +1,16 @@
+---
+- name: authenticate with vault
+  command: vault auth "{{ vault_root_token }}"
+
+- name: enable cert auth backend
+  run_once: yes
+  command: vault auth-enable cert
+  register: vault_enable_cert
+  failed_when: false
+
+- name: write host cert to authorized certificates
+  command: >
+    vault write
+    "auth/cert/certs/{{ inventory_hostname }}"
+    "display_name={{ inventory_hostname }}"
+    "certificate=@{{ host_cert }}"
