@@ -1,16 +1,21 @@
 ---
 - name: authenticate with vault
-  command: vault auth -tls-skip-verify "{{ vault_root_token }}"
+  command: vault auth "{{ vault_command_options }}" "{{ vault_root_token }}"
 
 - name: enable cert auth backend
   run_once: yes
-  command: vault auth-enable cert
-  register: vault_enable_cert
-  failed_when: false
+  command: vault auth-enable "{{ vault_command_options }}" cert
 
 - name: write host cert to authorized certificates
   command: >
-    vault write -tls-skip-verify
+    vault write "{{ vault_command_options }}"
     "auth/cert/certs/{{ inventory_hostname }}"
     "display_name={{ inventory_hostname }}"
     "certificate=@{{ host_cert }}"
+
+- name: authenticate with vault using cert
+  command: >
+    vault auth "{{ vault_command_options }}"
+    -method=cert
+    -client-cert="{{ host_cert }}"
+    -client-key="{{ host_key }}"
