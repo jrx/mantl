@@ -11,3 +11,13 @@ listener "tcp" {
 	tls_cert_file = "/etc/pki/mantl/cert"
 	tls_key_file = "/etc/pki/mantl/key"
 }
+
+# Necessary for `vault auth` to function
+path "auth/token/lookup-self" {
+    policy = "read"
+}
+
+# Allow servers to write their own SSL certificates to Vault
+path "auth/cert/certs/*" {
+    policy = "write"
+}
