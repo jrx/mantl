@@ -133,6 +133,6 @@ Upgrading from 1.1 to 1.2
 -------------------------
 
 Mantl 1.2 removed the ``consul_dns_domain`` variable. Services are reachable via
-``<service-name>.service`` and nodes via ``<hostname>.node``, instead of
-``<service-name>.service.<consul-dns-domain>`` and
+``<service-name>.service.consul`` and nodes via ``<hostname>.node.consul``,
+instead of ``<service-name>.service.<consul-dns-domain>`` and
 ``<hostname>.node.<consul-dns-domain>`` respectively.
