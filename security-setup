@@ -460,7 +460,7 @@ class Component(object):
         cert = posixpath.join(CERT_PATH, 'certs', name + '.cert.pem')
 
 	common = "server"
-        san = dict(SAN='DNS:localhost,DNS:*.node,DNS:*.service,DNS:*.node.consul,DNS:*.service.consul,IP:127.0.0.1')
+        san = dict(SAN='DNS:localhost,DNS:*.node.consul,DNS:*.service.consul,IP:127.0.0.1')
 
         with self.chdir(CERT_PATH):
             if posixpath.exists(key):
