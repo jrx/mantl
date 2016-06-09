@@ -12,6 +12,8 @@
     - src: ssl/cacert.pem # https://github.com/asteris-llc/mantl-packaging/issues/90
       dest: /etc/pki/CA/cacert.pem
     - src: ssl/cacert.pem
+      dest: /etc/pki/ca-trust/source/cacert.pem
+    - src: ssl/cacert.pem
       dest: /etc/pki/ca-trust/source/anchors/cacert.pem
     # CA private key
     - src: ssl/private/cakey.pem
