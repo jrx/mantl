@@ -17,6 +17,11 @@ while :; do
         # start brokers
         curl -d "{{ kafka_brokers_start }}" http://$api/api/broker/start
 
+        # create topics
+        {% for topic in kafka_topics %}
+        curl -d "topic={{ topic }}" http://$api/api/topic/add
+        {% endfor %}
+
         exit 0
     fi
 

@@ -98,10 +98,48 @@ Variables
 
    The Kafka options to pass to the brokers.
 
-   default: "log.flush.interval.ms=10000,num.recovery.threads.per.data.dir=1,delete.topic.enable=true,log.index.size.max.bytes=10485760,num.partitions=8,num.network.threads=3,socket.request.max.bytes=104857600,log.segment.bytes=536870912,log.cleaner.enable=true,zookeeper.connection.timeout.ms=1000000,log.flush.scheduler.interval.ms=2000,log.retention.hours=72,log.flush.interval.messages=20000,log.dirs=/mantl/a/dfs-data/kafka-logs\\,/mantl/b/dfs-data/kafka-logs\\,/mantl/c/dfs-data/kafka-logs\\,/mantl/d/dfs-data/kafka-logs\\,/mantl/e/dfs-data/kafka-logs\\,/mantl/f/dfs-data/kafka-logs,log.index.interval.bytes=4096,socket.receive.buffer.bytes=1048576,min.insync.replicas=2,replica.lag.max.messages=10000000,replica.lag.time.max.ms=1000000,log.retention.check.interval.ms=3600000,message.max.bytes=20480,default.replication.factor=2,zookeeper.session.timeout.ms=500000,num.io.threads=8,auto.create.topics.enable=false,socket.send.buffer.bytes=1048576"
+   default:
+
+    - log.flush.interval.ms=10000
+    - log.flush.interval=1000
+    - num.recovery.threads.per.data.dir=1
+    - delete.topic.enable=true
+    - log.index.size.max.bytes=10485760
+    - num.partitions=8
+    - num.network.threads=3
+    - socket.request.max.bytes=104857600
+    - log.segment.bytes=536870912
+    - log.cleaner.enable=true
+    - zookeeper.connection.timeout.ms=1000000
+    - log.flush.scheduler.interval.ms=2000
+    - log.retention.hours=72
+    - log.flush.interval.messages=20000
+    - log.dirs=/mantl/a/dfs-data/kafka-logs\\,/mantl/b/dfs-data/kafka-logs\\,/mantl/c/dfs-data/kafka-logs\\,/mantl/d/dfs-data/kafka-logs\\,/mantl/e/dfs-data/kafka-logs\\,/mantl/f/dfs-data/kafka-logs
+    - log.index.interval.bytes=4096
+    - socket.receive.buffer.bytes=10485
+    - min.insync.replicas=2
+    - replica.lag.max.messages=10000000
+    - replica.lag.time.max.ms=1000000
+    - log.retention.check.interval.ms=3600000
+    - message.max.bytes=20480
+    - default.replication.factor=2
+    - zookeeper.session.timeout.ms=500000
+    - num.io.threads=8
+    - auto.create.topics.enable=false
+    - socket.send.buffer.bytes=1048576
+    - topic.flush.intervals.ms=5000
+    - topic.log.retention.hours=logs:24\\,events:24\\,metrics:24\\,alarm-state-transitions:1
+    - topic.partition.count.map=logs:16\\,events:16\\,metrics:24\\,alarm-state-transitions:3
+    - topic.flush.intervals.ms=logs:3000\\,events:500\\,metrics:3000\\,alarm-state-transitions:1000
 
 .. data:: kafka_broker_jvm_options
 
    The Kafka JVM options to pass to the brokers.
 
-   default: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+   default:
+
+    - "-Dcom.sun.management.jmxremote"
+    - "-Dcom.sun.management.jmxremote.port=9010"
+    - "-Dcom.sun.management.jmxremote.local.only=false"
+    - "-Dcom.sun.management.jmxremote.authenticate=false"
+    - "-Dcom.sun.management.jmxremote.ssl=false"
