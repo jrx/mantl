@@ -1,3 +1,14 @@
+# Mesosphere Tags
+variable "owner" {
+  description = "Just a tag of the owner"
+  default = "slack-username"
+}
+
+variable "expiration" {
+  description = "Just a tag for the expiration time"
+  default = "8hours"
+}
+
 variable "count" {default = "4"}
 variable "count_format" {default = "%02d"}
 variable "iam_profile" {default = "" }
@@ -36,7 +47,7 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids = [ "${split(",", var.security_group_ids)}"]
   key_name = "${var.ssh_key_pair}"
   associate_public_ip_address = true
-  subnet_id = "${element(split(",", var.vpc_subnet_ids), count.index)}" 
+  subnet_id = "${element(split(",", var.vpc_subnet_ids), count.index)}"
   iam_instance_profile = "${var.iam_profile}"
   root_block_device {
     delete_on_termination = true
@@ -50,6 +61,8 @@ resource "aws_instance" "instance" {
     sshUser = "${var.ssh_username}"
     role = "${var.role}"
     dc = "${var.datacenter}"
+    owner = "${var.owner}"
+    expiration = "${var.expiration}"
   }
 }
 
