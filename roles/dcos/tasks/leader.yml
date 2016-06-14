@@ -1,39 +1,52 @@
 ---
 # Prepare the directories and download installation file
 
-- name: Clear install directory
+# - name: Clear install directory
+#   sudo: yes
+#   file: path=/tmp/dcos-install/ state=absent
+#   ignore_errors: true
+#
+# - file: path=/tmp/dcos-install state=directory mode=0755
+# - file: path=/tmp/dcos-install/genconf/ state=directory mode=0755
+# - get_url: url="{{ dcos_download }}" dest=/tmp/dcos-install/dcos_generate_config.sh mode=0440
+#
+# # Create IP detection script
+# - template: src=ip-detect-aws.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
+#   when: provider == "aws"
+# - template: src=ip-detect-gce.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
+#   when: provider == "gce"
+# - template: src=ip-detect-eth0.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
+#   when: provider == "eth0"
+#
+# # Generate DC/OS configuration file
+# - template: src=config-static.yaml.j2 dest=/tmp/dcos-install/genconf/config.yaml mode=0644
+#   when: exhibitor == "static"
+#
+# # Generate Rexray configuration file
+# - template: src=rexray.yaml.j2 dest=/tmp/dcos-install/genconf/rexray.yaml mode=0644
+#   when: rexray_config_method == "file"
+#
+# # Generate DC/OS bootstrap files
+# - shell: bash dcos_generate_config.sh chdir=/tmp/dcos-install/
+#   sudo: yes
+#
+# # Install DC/OS Master
+# - shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh master --disable-preflight
+#   sudo: yes
+#   ignore_errors: yes
+
+###########
+# Changes to get DC/OS running along with Mantl
+
+- name: DC/OS | Change Default HTTP Port for AdminRouter
+  lineinfile: dest=/opt/mesosphere/active/adminrouter/nginx/conf/nginx.conf regexp="        listen.*80 default_server;" line="        listen 880 default_server;" state=present
   sudo: yes
-  file: path=/tmp/dcos-install/ state=absent
-  ignore_errors: true
 
-- file: path=/tmp/dcos-install state=directory mode=0755
-- file: path=/tmp/dcos-install/genconf/ state=directory mode=0755
-- get_url: url="{{ dcos_download }}" dest=/tmp/dcos-install/dcos_generate_config.sh mode=0440
-
-# Create IP detection script
-- template: src=ip-detect-aws.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
-  when: provider == "aws"
-- template: src=ip-detect-gce.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
-  when: provider == "gce"
-- template: src=ip-detect-eth0.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
-  when: provider == "eth0"
-
-# Generate DC/OS configuration file
-- template: src=config-static.yaml.j2 dest=/tmp/dcos-install/genconf/config.yaml mode=0644
-  when: exhibitor == "static"
-
-# Generate Rexray configuration file
-- template: src=rexray.yaml.j2 dest=/tmp/dcos-install/genconf/rexray.yaml mode=0644
-  when: rexray_config_method == "file"
-
-# Generate DC/OS bootstrap files
-- shell: bash dcos_generate_config.sh chdir=/tmp/dcos-install/
+- name: DC/OS | Change Default HTTPS Port for AdminRouter
+  lineinfile: dest=/opt/mesosphere/active/adminrouter/nginx/conf/nginx.conf regexp="        listen.*443 ssl spdy default_server;" line="        listen 8443 ssl spdy default_server;" state=present
   sudo: yes
 
-# Install DC/OS Master
-- shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh master --disable-preflight
-  sudo: yes
-  ignore_errors: yes
+###########
 
 # - name: install leader configuration
 #   sudo: yes
