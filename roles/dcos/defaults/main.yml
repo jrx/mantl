@@ -1,26 +1,11 @@
 ---
-# (internal) IP Address of the Workstation
-workstation_ip: 172.31.218.124
-
-# (internal) IP Addresses for the Master Nodes
-master_list: |
-  - 10.1.1.26
-  - 10.1.2.74
-  - 10.1.1.71
-
 # DNS Resolvers
 resolvers: |
-  - 10.1.0.2
   - 8.8.8.8
-
-# DNS Search Domain
-dns_search: eu-central-1.compute.internal
+  - 8.8.4.4
 
 # Name of the DC/OS Cluster
 cluster_name: dcos-ansible
-
-# SSH User for installation
-remote_user: centos
 
 # Choose the IP Detect Script
 # options: eth0, aws, gce
@@ -32,14 +17,6 @@ dcos_download: https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.s
 # Configuration for the Exhibitor Storage Backend
 # options: static
 exhibitor: static
-
-# Configure rexray to enable support of external volumes (only for Mesosphere Enterprise DC/OS)
-# options: empty, file
-rexray_config_method: file
-
-# DC/OS credentials (only needed for Mesosphere Enterprise DC/OS)
-superuser_username: admin
-superuser_password_hash: $6$rounds=656000$8CXbMqwuglDt3Yai$ZkLEj8zS.GmPGWt.dhwAv0.XsjYXwVHuS9aHh3DMcfGaz45OpGxC5oQPXUUpFLMkqlXCfhXMloIzE0Xh8VwHJ.
 
 #################################################################
 

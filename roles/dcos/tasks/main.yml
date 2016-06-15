@@ -17,7 +17,7 @@
     path: "{{ consul_dir }}"
     state: directory
   tags:
-    - mesos
+    - dcos
 
 # - name: create mesos entries for syslogd
 #   sudo: yes
@@ -34,6 +34,58 @@
 #     - mesos
 
 #- meta: flush_handlers
+
+- name: clear install directory
+  sudo: yes
+  file: path=/tmp/dcos-install/ state=absent
+  ignore_errors: true
+  tags:
+    - dcos
+
+- name: create install directory
+  file: path=/tmp/dcos-install state=directory mode=0755
+  tags:
+    - dcos
+
+- name: create install directory/genconf
+  file: path=/tmp/dcos-install/genconf/ state=directory mode=0755
+  tags:
+    - dcos
+
+- name: download installation file
+  get_url: url="{{ dcos_download }}" dest=/tmp/dcos-install/dcos_generate_config.sh mode=0440
+  tags:
+    - dcos
+
+- name: set IP detection script for AWS
+  template: src=ip-detect-aws.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
+  when: provider == "aws"
+  tags:
+    - dcos
+
+- name: set IP detection script for GCE
+  template: src=ip-detect-gce.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
+  when: provider == "gce"
+  tags:
+    - dcos
+
+- name: set IP detection script for eth0
+  template: src=ip-detect-eth0.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
+  when: provider == "eth0"
+  tags:
+    - dcos
+
+- name: generate DC/OS configuration
+  template: src=config-static.yaml.j2 dest=/tmp/dcos-install/genconf/config.yaml mode=0644
+  when: exhibitor == "static"
+  tags:
+    - dcos
+
+- name: generate DC/OS bootstrap files
+  shell: bash dcos_generate_config.sh chdir=/tmp/dcos-install/
+  sudo: yes
+  tags:
+    - dcos
 
 - include: leader.yml
   when: mesos_mode == "leader" or mesos_mode == "mixed"

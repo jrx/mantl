@@ -1,61 +1,34 @@
 ---
-# Prepare the directories and download installation file
-
-- name: Clear install directory
-  sudo: yes
-  file: path=/tmp/dcos-install/ state=absent
-  ignore_errors: true
-
-- file: path=/tmp/dcos-install state=directory mode=0755
-- file: path=/tmp/dcos-install/genconf/ state=directory mode=0755
-- get_url: url="{{ dcos_download }}" dest=/tmp/dcos-install/dcos_generate_config.sh mode=0440
-
-# Create IP detection script
-- template: src=ip-detect-aws.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
-  when: provider == "aws"
-- template: src=ip-detect-gce.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
-  when: provider == "gce"
-- template: src=ip-detect-eth0.j2 dest=/tmp/dcos-install/genconf/ip-detect mode=0644
-  when: provider == "eth0"
-
-# Generate DC/OS configuration file
-- template: src=config-static.yaml.j2 dest=/tmp/dcos-install/genconf/config.yaml mode=0644
-  when: exhibitor == "static"
-
-# Generate Rexray configuration file
-- template: src=rexray.yaml.j2 dest=/tmp/dcos-install/genconf/rexray.yaml mode=0644
-  when: rexray_config_method == "file"
-
-# Generate DC/OS bootstrap files
-- shell: bash dcos_generate_config.sh chdir=/tmp/dcos-install/
-  sudo: yes
-
-# Install DC/OS Agent
-- shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh slave --disable-preflight
+- name: install DC/OS agent
+  shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh slave --disable-preflight
   sudo: yes
   ignore_errors: yes
-
-###########
-# Changes to get DC/OS running along with Mantl
+  tags:
+    - dcos
 
 - set_fact: colon=":"
+  tags:
+    - dcos
 
-- name: DC/OS | Change UDP Port for Spartan
+- name: change UDP port for spartan
   lineinfile:
     dest=/opt/mesosphere/etc/spartan.json
     regexp="  \"udp_port.*"
     line="  \"udp_port\"{{colon}} 553,"
     state=present
   sudo: yes
+  tags:
+    - dcos
 
-- name: DC/OS | Change TCP Port for Spartan
+- name: change TCP port for spartan
   lineinfile:
     dest=/opt/mesosphere/etc/spartan.json
     regexp="  \"tcp_port.*"
     line="  \"tcp_port\"{{colon}} 553"
     state=present
   sudo: yes
-
+  tags:
+    - dcos
 
 # - name: install follower configuration
 #   sudo: yes

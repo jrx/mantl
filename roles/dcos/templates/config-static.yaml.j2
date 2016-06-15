@@ -4,12 +4,11 @@ cluster_name: '{{ cluster_name }}'
 exhibitor_storage_backend: static
 master_discovery: static
 master_list:
-{{ master_list }}
-superuser_username: {{ superuser_username }}
-superuser_password_hash: {{ superuser_password_hash }}
+{% for item in groups['role=control'] %}
+{% if hostvars[item].private_ipv4 is defined %}
+- {{ hostvars[item].private_ipv4 }}
+{% endif %}
+{% endfor %}
 resolvers:
 {{ resolvers }}
-dns_search: {{ dns_search }}
-rexray_config_method: {{ rexray_config_method }}
-rexray_config_filename: genconf/rexray.yaml
 oauth_enabled: 'false'
