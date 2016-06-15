@@ -35,6 +35,27 @@
   sudo: yes
   ignore_errors: yes
 
+###########
+# Changes to get DC/OS running along with Mantl
+
+- set_fact: colon=":"
+
+- name: DC/OS | Change UDP Port for Spartan
+  lineinfile:
+    dest=/opt/mesosphere/etc/spartan.json
+    regexp="  \"udp_port.*"
+    line="  \"udp_port\"{{colon}} 553,"
+    state=present
+  sudo: yes
+
+- name: DC/OS | Change TCP Port for Spartan
+  lineinfile:
+    dest=/opt/mesosphere/etc/spartan.json
+    regexp="  \"tcp_port.*"
+    line="  \"tcp_port\"{{colon}} 553"
+    state=present
+  sudo: yes
+
 
 # - name: install follower configuration
 #   sudo: yes

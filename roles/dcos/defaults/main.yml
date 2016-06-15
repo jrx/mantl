@@ -4,9 +4,9 @@ workstation_ip: 172.31.218.124
 
 # (internal) IP Addresses for the Master Nodes
 master_list: |
-  - 10.1.1.32
-  - 10.1.2.187
-  - 10.1.1.236
+  - 10.1.1.26
+  - 10.1.2.74
+  - 10.1.1.71
 
 # DNS Resolvers
 resolvers: |

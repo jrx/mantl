@@ -35,4 +35,28 @@
   tags:
     - dnsmasq
 
+- name: configure dnsmasq for Spartan
+  sudo: yes
+  template:
+    src: 30-spartan
+    dest: /etc/dnsmasq.d/30-spartan
+    mode: 0755
+  when: cluster_name is defined
+  notify:
+    - restart dnsmasq
+  tags:
+    - dnsmasq
+
+- name: configure dnsmasq for Mesos
+  sudo: yes
+  template:
+    src: 40-mesos
+    dest: /etc/dnsmasq.d/40-mesos
+    mode: 0755
+  when: cluster_name is defined
+  notify:
+    - restart dnsmasq
+  tags:
+    - dnsmasq
+
 - meta: flush_handlers

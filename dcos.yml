@@ -19,15 +19,15 @@
     ansible_python_interpreter: "/usr/bin/python2"
     consul_servers_group: role=control
   roles:
-    # - common
-    # - lvm
-    # - docker
-    # - logrotate
-    # - consul-template
-    # - nginx
-    # - consul
-    # - etcd
-    # - dnsmasq
+    - common
+    - lvm
+    - docker
+    - logrotate
+    - consul-template
+    - nginx
+    - consul
+    - etcd
+    - dnsmasq
 
 # ROLES - after provisioning the software that's common to all hosts, we do
 # specialized hosts. This configuration has two major groups: control nodes and

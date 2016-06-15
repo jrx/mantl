@@ -1,0 +1,13 @@
+#Listen on all interfaces
+interface=*
+
+addn-hosts=/etc/hosts
+
+bogus-priv
+domain-needed
+
+# Set upstream dns servers
+resolv-file=/etc/resolv.conf.masq
+
+# Forward domain spartan
+server=/spartan/198.51.100.1#553
