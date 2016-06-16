@@ -19,7 +19,7 @@
 - name: configure nginx
   run_once: yes
   sudo: yes
-  command: consul-cli kv-write --token={{ consul_acl_secure_token }} secure/mesos/nginx/do_auth {{do_mesos_auth}}
+  command: consul-cli kv-write --token={{ consul_acl_secure_token }} secure/mesos/nginx/do_auth false
   tags:
     - mesos
 
@@ -36,4 +36,3 @@
   command: consul-cli kv-write --token={{ consul_acl_secure_token }} secure/mesos/leader/proxy_port {{mesos_leader_proxy_port}}
   tags:
     - mesos
-

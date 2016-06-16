@@ -1,12 +1,12 @@
 ---
-- name: install marathon package
-  sudo: yes
-  yum:
-    name: "{{ marathon_package }}"
-    state: present
-  tags:
-    - marathon
-    - bootstrap
+# - name: install marathon package
+#   sudo: yes
+#   yum:
+#     name: "{{ marathon_package }}"
+#     state: present
+#   tags:
+#     - marathon
+#     - bootstrap
 
 - name: create consul acl for marathon
   sudo: yes
@@ -15,32 +15,32 @@
   tags:
     - marathon
 
-- include: conf.yml
+# - include: conf.yml
 
-- name: configure marathon unit file
-  sudo: yes
-  replace:
-    dest: /etc/systemd/system/marathon.service
-    regexp: "=network.target"
-    replace: '=mesos-master.service'
-  notify:
-    - reload marathon
-    - restart marathon
-  tags:
-    - marathon
+# - name: configure marathon unit file
+#   sudo: yes
+#   replace:
+#     dest: /etc/systemd/system/marathon.service
+#     regexp: "=network.target"
+#     replace: '=mesos-master.service'
+#   notify:
+#     - reload marathon
+#     - restart marathon
+#   tags:
+#     - marathon
 
-- name: configure marathon to wait for zookeeper before starting
-  sudo: yes
-  lineinfile:
-    dest: /etc/systemd/system/marathon.service
-    line: "ExecStartPre=/usr/local/bin/zookeeper-wait-for-listen.sh {{ marathon_zk_dns }}"
-    insertbefore: "^ExecStart="
-    state: present
-  notify:
-    - reload marathon
-    - restart marathon
-  tags:
-    - marathon
+# - name: configure marathon to wait for zookeeper before starting
+#   sudo: yes
+#   lineinfile:
+#     dest: /etc/systemd/system/marathon.service
+#     line: "ExecStartPre=/usr/local/bin/zookeeper-wait-for-listen.sh {{ marathon_zk_dns }}"
+#     insertbefore: "^ExecStart="
+#     state: present
+#   notify:
+#     - reload marathon
+#     - restart marathon
+#   tags:
+#     - marathon
 
 - name: generate marathon consul service
   sudo: yes
@@ -52,7 +52,7 @@
   tags:
     - marathon
 
-- meta: flush_handlers
+# - meta: flush_handlers
 
 - include: nginx-proxy.yml
 

@@ -46,6 +46,5 @@ You can use these variables to customize your Traefik installation.
    Automatically expose Marathon applications in traefik.
 
    The traefik default is ``false``, or not forward traffic.
-  
+
    The mantl default is set to ``true``.
- 

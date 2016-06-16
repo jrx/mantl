@@ -1,4 +1,17 @@
 ---
+
+- name: create marathon directory
+  file: path=/etc/marathon/ state=directory mode=0755
+  sudo: yes
+  tags:
+    - marathon
+
+- name: create marathon application directory
+  file: path=/etc/marathon/apps/ state=directory mode=0755
+  sudo: yes
+  tags:
+    - marathon
+
 - name: create json files for jobs
   sudo: yes
   template:
@@ -11,13 +24,18 @@
   tags:
     - marathon
 
+- name: wait until marathon is ready
+  wait_for: host=localhost port=8080 delay=10 state=present
+
 - name: start jobs
   run_once: true
   sudo: yes
-  command: 'curl -X PUT -d@/etc/marathon/apps/{{ item }}.json -H "Content-Type: application/json" http://localhost:18080/v2/apps/{{ item }}'
+  command: 'curl -X PUT -d@/etc/marathon/apps/{{ item }}.json -H "Content-Type: application/json" http://localhost:8080/v2/apps/{{ item }}'
   changed_when: false
   failed_when: "'deploymentId' not in result.stdout"
   register: result
+  retries: 5
+  delay: 20
   with_items:
     - mesos-consul
     - mantl-api

@@ -19,14 +19,14 @@
   tags:
     - dcos
 
-- name: disable IPv6 for all interfaces
-  sudo: yes
-  sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 sysctl_set=yes
-  tags:
-    - dcos
-
-- name: disable IPv6 for default interface
-  sudo: yes
-  sysctl: name="net.ipv6.conf.default.disable_ipv6" value=1 sysctl_set=yes
-  tags:
-    - dcos
+# - name: disable IPv6 for all interfaces
+#   sudo: yes
+#   sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 sysctl_set=yes
+#   tags:
+#     - dcos
+#
+# - name: disable IPv6 for default interface
+#   sudo: yes
+#   sysctl: name="net.ipv6.conf.default.disable_ipv6" value=1 sysctl_set=yes
+#   tags:
+#     - dcos
