@@ -285,6 +285,13 @@ resource "aws_security_group" "control" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress { # DCOS UI
+    from_port = 8000
+    to_port = 8000
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ingress { # Marathon
     from_port = 8080
     to_port = 8080
