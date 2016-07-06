@@ -25,14 +25,14 @@ variable "region" {default = "eu-central-1"}
 variable "short_name" {default = "jrx-mantl"}
 variable "long_name" {default = "jrx-mantl"}
 variable "ssh_username" {default = "centos"}
-variable "worker_count" { default = 4 }
+variable "worker_count" { default = 5 }
 variable "kubeworker_count" { default = 2 }
 #variable "dns_subdomain" { default = ".dev" }
 #variable "dns_domain" { default = "mesosphere.com" }
 #variable "dns_zone_id" { default = "XXXXXXXXXXXX" }
 variable "control_type" { default = "m3.medium" }
 variable "edge_type" { default = "m3.medium" }
-variable "worker_type" { default = "m3.large" }
+variable "worker_type" { default = "m3.xlarge" }
 variable "kubeworker_type" { default = "m3.large" }
 variable "kubeworker_type" { default = "m3.large" }
 
