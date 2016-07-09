@@ -42,6 +42,53 @@
   tags:
     - dcos
 
+- name: create directory for dc/os cli
+  file: path=/opt/dcos-cli state=directory mode=0755
+  sudo: yes
+  tags:
+    - dcos
+
+- name: download pip
+  get_url: url="https://bootstrap.pypa.io/get-pip.py" dest=/opt/dcos-cli/get-pip.py mode=0440
+  sudo: yes
+  tags:
+    - dcos
+
+- name: install pip
+  shell: python /opt/dcos-cli/get-pip.py
+  args:
+    executable: /bin/bash
+  sudo: yes
+  tags:
+    - dcos
+
+- name: install virtualenv
+  shell: pip2.7 install virtualenv
+  args:
+    executable: /bin/bash
+  sudo: yes
+  tags:
+    - dcos
+
+- name: download dc/os cli
+  get_url: url="https://downloads.dcos.io/dcos-cli/install.sh" dest=/opt/dcos-cli/install.sh mode=0744
+  sudo: yes
+  tags:
+    - dcos
+
+- name: wait until dc/os is ready
+  wait_for: host=localhost port=8000 delay=10 state=present
+  tags:
+    - dcos
+
+- name: install dcos cli
+  shell: bash ./install.sh . http://leader.mesos:8000 --add-path yes
+  args:
+    chdir: /opt/dcos-cli/
+  sudo: yes
+  tags:
+    - dcos
+
 # - name: install leader configuration
 #   sudo: yes
 #   yum:
