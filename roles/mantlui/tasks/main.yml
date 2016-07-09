@@ -32,3 +32,25 @@
     - restart nginx-mantlui
   tags:
     - mantlui
+
+- name: create directory for health check
+  file: path=/usr/share/mesos/webui/master/static/js/ state=directory mode=0755
+  sudo: yes
+
+- name: create file controllers.js for health check
+  copy:
+    content: ""
+    dest: /usr/share/mesos/webui/master/static/js/controllers.js
+  sudo: yes
+
+- name: create file services.js for health check
+  copy:
+    content: ""
+    dest: /usr/share/mesos/webui/master/static/js/services.js
+  sudo: yes
+
+- name: create file app.js for health check
+  copy:
+    content: ""
+    dest: /usr/share/mesos/webui/master/static/js/app.js
+  sudo: yes
