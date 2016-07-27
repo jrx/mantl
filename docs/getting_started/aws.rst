@@ -23,7 +23,7 @@ customization. In the next sections, we'll describe the settings that you need
 to configure.
 
 Do not copy the text contents above into a file, if you do not have the terraform/aws.sample.tf file, you need to clone the mantl repository.
-Please note, newer versions of this file do not have "access_key" or "secret_key" lines, we automatically find your AWS credentials from amazon's new "AWS Credentials file" standard.
+Please note, newer versions of this file do not have "access_key" or "secret_key" lines, we automatically find your AWS credentials from Amazon's new "AWS Credentials file" standard.
 
 Store your credentials like below in a file called ``~/.aws/credentials`` on Linux/Mac, or ``%USERPROFILE%\.aws\credentials`` on Windows.
 
@@ -33,7 +33,7 @@ Store your credentials like below in a file called ``~/.aws/credentials`` on Lin
   aws_access_key_id = ACCESS_KEY
   aws_secret_access_key = SECRET_KEY
 
-If you do not have an AWS access key ID and secret key, then follow the "Creating an IAM user" section below. If you already have working AWS credentials, you can skip this step.
+If you do not have an AWS access key ID and secret key, then follow the "Creating an IAM User" section below. If you already have working AWS credentials, you can skip this step.
 
 Creating an IAM User
 ^^^^^^^^^^^^^^^^^^^^^
@@ -265,38 +265,3 @@ For managing DNS with Route 53, you can use a policy like the following:
 
 You would replace HOSTED_ZONE_ID with the hosted zone ID of your domain in
 Route 53.
-
-Adding an Elastic Load Balancer (ELB)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Optionally, you can configure your environment to include an Elastic Load
-Balancer (ELB) in front of Mantl UI.
-
-You will need to ensure that your IAM user has the following permissions:
-
-* elasticloadbalancing:AddTags
-* elasticloadbalancing:ApplySecurityGroupsToLoadBalancer
-* elasticloadbalancing:ConfigureHealthCheck
-* elasticloadbalancing:CreateLoadBalancer
-* elasticloadbalancing:CreateLoadBalancerListeners
-* elasticloadbalancing:DeleteLoadBalance
-* elasticloadbalancing:DescribeLoadBalancerAttributes
-* elasticloadbalancing:DescribeLoadBalancers
-* elasticloadbalancing:ModifyLoadBalancerAttributes
-* elasticloadbalancing:RegisterInstancesWithLoadBalancer
-* iam:DeleteServerCertificate
-* iam:GetServerCertificate
-* iam:UploadServerCertificate
-
-In your ``aws.tf``, you will want to uncomment the aws-elb module:
-
-.. code-block:: json
-
-  # Example setup for an AWS ELB
-  module "aws-elb" {
-    source = "./terraform/aws/elb"
-    short_name = "${var.short_name}"
-    instances = "${module.control-nodes.control_ids}"
-    subnets = "${terraform_remote_state.vpc.output.subnet_ids}"
-    security_groups = "${module.control-nodes.ui_security_group},${terraform_remote_state.vpc.output.default_security_group}"
-  }

@@ -1,0 +1,83 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 3 (0x3)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=kubernetes@1465848178
+        Validity
+            Not Before: Jun 13 20:02:58 2016 GMT
+            Not After : Jun 11 20:02:58 2026 GMT
+        Subject: CN=kubecfg
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (2048 bit)
+                Modulus (2048 bit):
+                    00:cb:f4:a0:15:df:e9:89:32:e8:27:0c:76:df:89:
+                    3a:76:06:e9:7d:b5:3f:80:94:07:fb:aa:78:68:c3:
+                    bc:06:fd:96:ac:c0:77:60:bf:0e:25:a3:1f:5e:d4:
+                    66:83:25:17:a9:42:a7:0a:74:84:86:0c:87:ed:31:
+                    16:d7:dc:3d:a7:70:49:57:8c:bd:d9:f8:48:14:bb:
+                    7d:cd:42:b5:16:bc:1b:ae:f5:8c:23:0b:20:53:63:
+                    bb:ff:ac:79:75:f7:6c:dc:e6:cd:61:29:28:a0:ad:
+                    5f:50:17:cb:8a:a2:1a:1e:d0:1e:c1:0a:93:cd:42:
+                    d0:e4:1c:e4:29:28:f5:53:02:ec:b5:6e:67:d2:a5:
+                    e4:48:8f:bc:76:44:3b:d5:bc:0a:f4:67:bb:95:b1:
+                    72:d3:8c:7d:d9:e4:ec:ee:45:3e:04:b7:e1:11:1a:
+                    d4:35:d5:02:3a:2e:21:1b:7d:ff:3d:ae:5b:76:3d:
+                    0d:e7:01:0b:61:9f:4f:ab:cd:41:dc:8e:a7:33:9d:
+                    8a:2c:04:c2:b1:18:db:db:b9:0a:e1:82:3e:1e:8d:
+                    0c:16:55:60:42:a6:35:fd:aa:fc:3b:f3:e0:e5:c2:
+                    3f:ba:6c:69:92:e1:04:00:23:a7:23:4a:90:7d:c0:
+                    20:65:b7:08:2b:62:cd:4a:8b:63:2f:e1:49:03:08:
+                    09:f5
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                4C:CF:F0:9B:DD:A7:3F:B8:27:D0:F2:FE:53:EA:40:80:61:35:D8:2D
+            X509v3 Authority Key Identifier: 
+                keyid:26:35:DC:47:04:BD:5F:1E:1C:C9:1D:00:E8:47:93:FC:C0:66:AA:68
+                DirName:/CN=kubernetes@1465848178
+                serial:CF:D2:CA:F8:B3:10:19:CC
+
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Key Usage: 
+                Digital Signature
+    Signature Algorithm: sha256WithRSAEncryption
+        46:01:63:8f:ae:b8:34:d3:c9:75:74:58:13:30:64:84:c0:9c:
+        7a:13:0c:88:c3:32:88:10:74:27:54:62:89:96:08:04:8d:c9:
+        11:f3:0e:68:b8:b6:bc:6f:e2:6c:60:0a:2e:df:de:d1:ae:f0:
+        73:f0:1c:42:70:e1:d7:0c:a8:06:d6:ae:d5:a4:4d:d3:dc:8d:
+        b3:4d:9a:ee:45:12:5b:b7:d6:1b:53:f9:72:e9:f6:fc:65:2b:
+        86:44:84:46:da:50:22:ac:dd:3b:c8:ba:e5:48:ba:d1:09:66:
+        58:a3:8d:6d:f2:86:6e:04:5a:2d:ba:cd:65:9d:2f:79:d3:fb:
+        46:59:52:e3:78:b5:df:5e:9a:80:9d:b8:d7:85:18:8d:94:70:
+        67:93:ff:94:e6:6d:f2:6d:6f:b5:4e:92:97:b3:ed:a9:21:f0:
+        86:f1:59:fa:70:97:b5:6d:d3:0b:28:3a:32:70:b5:c0:3d:c2:
+        3b:84:10:d8:4f:2a:ac:9a:b8:82:bb:40:25:25:ca:b1:9c:67:
+        c4:6c:b6:c0:15:8b:08:26:d7:c2:8e:e2:4f:b6:ae:2d:2a:f1:
+        f4:3d:8a:d0:70:1e:a6:1f:88:a8:8b:de:89:c8:2b:aa:a3:a0:
+        e8:f0:28:a9:93:c1:65:62:a6:e7:4d:7b:a9:b9:f1:72:04:9e:
+        f9:9d:35:13
+-----BEGIN CERTIFICATE-----
+MIIDTzCCAjegAwIBAgIBAzANBgkqhkiG9w0BAQsFADAgMR4wHAYDVQQDDBVrdWJl
+cm5ldGVzQDE0NjU4NDgxNzgwHhcNMTYwNjEzMjAwMjU4WhcNMjYwNjExMjAwMjU4
+WjASMRAwDgYDVQQDDAdrdWJlY2ZnMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
+CgKCAQEAy/SgFd/piTLoJwx234k6dgbpfbU/gJQH+6p4aMO8Bv2WrMB3YL8OJaMf
+XtRmgyUXqUKnCnSEhgyH7TEW19w9p3BJV4y92fhIFLt9zUK1FrwbrvWMIwsgU2O7
+/6x5dfds3ObNYSkooK1fUBfLiqIaHtAewQqTzULQ5BzkKSj1UwLstW5n0qXkSI+8
+dkQ71bwK9Ge7lbFy04x92eTs7kU+BLfhERrUNdUCOi4hG33/Pa5bdj0N5wELYZ9P
+q81B3I6nM52KLATCsRjb27kK4YI+Ho0MFlVgQqY1/ar8O/Pg5cI/umxpkuEEACOn
+I0qQfcAgZbcIK2LNSotjL+FJAwgJ9QIDAQABo4GhMIGeMAkGA1UdEwQCMAAwHQYD
+VR0OBBYEFEzP8Jvdpz+4J9Dy/lPqQIBhNdgtMFAGA1UdIwRJMEeAFCY13EcEvV8e
+HMkdAOhHk/zAZqpooSSkIjAgMR4wHAYDVQQDDBVrdWJlcm5ldGVzQDE0NjU4NDgx
+NziCCQDP0sr4sxAZzDATBgNVHSUEDDAKBggrBgEFBQcDAjALBgNVHQ8EBAMCB4Aw
+DQYJKoZIhvcNAQELBQADggEBAEYBY4+uuDTTyXV0WBMwZITAnHoTDIjDMogQdCdU
+YomWCASNyRHzDmi4trxv4mxgCi7f3tGu8HPwHEJw4dcMqAbWrtWkTdPcjbNNmu5F
+Elu31htT+XLp9vxlK4ZEhEbaUCKs3TvIuuVIutEJZlijjW3yhm4EWi26zWWdL3nT
++0ZZUuN4td9emoCduNeFGI2UcGeT/5TmbfJtb7VOkpez7akh8IbxWfpwl7Vt0wso
+OjJwtcA9wjuEENhPKqyauIK7QCUlyrGcZ8RstsAViwgm18KO4k+2ri0q8fQ9itBw
+HqYfiKiL3onIK6qjoOjwKKmTwWVipudNe6m58XIEnvmdNRM=
+-----END CERTIFICATE-----

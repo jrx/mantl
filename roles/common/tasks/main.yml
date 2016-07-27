@@ -136,7 +136,6 @@
     - bootstrap
 
 - include: users.yml
-- include: ssl.yml
 - include: ssh.yml
 - include: fail2ban.yml
 - include: dcos.yml

@@ -36,6 +36,7 @@ resource "aws_ebs_volume" "ebs" {
 
   tags {
     Name = "${var.short_name}-${var.role}-lvm-${format(var.count_format, count.index+1)}"
+    KubernetesCluster = "${var.short_name}"
   }
 }
 
@@ -63,6 +64,7 @@ resource "aws_instance" "instance" {
     dc = "${var.datacenter}"
     owner = "${var.owner}"
     expiration = "${var.expiration}"
+    KubernetesCluster = "${var.short_name}"
   }
 }
 
