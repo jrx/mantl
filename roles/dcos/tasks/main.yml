@@ -1,16 +1,4 @@
 ---
-# - name: install mesos packages
-#   sudo: yes
-#   yum:
-#     name: "{{ item }}"
-#     state: present
-#   with_items:
-#     - "{{ mesos_package }}"
-#     - cyrus-sasl-md5
-#   tags:
-#     - mesos
-#     - bootstrap
-
 - name: ensure consul.d is present
   sudo: yes
   file:
@@ -18,22 +6,6 @@
     state: directory
   tags:
     - dcos
-
-# - name: create mesos entries for syslogd
-#   sudo: yes
-#   copy:
-#     dest: /etc/rsyslog.d/20-mesos.conf
-#     content: |
-#       # Mesos logging
-#       :syslogtag, isequal, "mesos-slave:"  /var/log/mesos/mesos-agent.log
-#       :syslogtag, isequal, "mesos-master:"  /var/log/mesos/mesos-master.log
-#       & ~
-#   notify:
-#     - restart rsyslog
-#   tags:
-#     - mesos
-
-#- meta: flush_handlers
 
 - name: clear install directory
   sudo: yes

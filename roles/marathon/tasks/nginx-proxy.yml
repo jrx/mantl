@@ -10,15 +10,15 @@
   tags:
     - marathon
 
-- name: copy nginx configuration
-  sudo: yes
-  copy:
-    src: marathon.nginx
-    dest: /etc/nginx/templates
-  notify:
-    - reload nginx
-  tags:
-    - marathon
+# - name: copy nginx configuration
+#   sudo: yes
+#   copy:
+#     src: marathon.nginx
+#     dest: /etc/nginx/templates
+#   notify:
+#     - reload nginx
+#   tags:
+#     - marathon
 
 - name: write nginx config vars to the consul k/v
   run_once: yes

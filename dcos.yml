@@ -16,10 +16,10 @@
     # this variable.
     # consul_acl_datacenter: your_primary_datacenter
 
-    ansible_python_interpreter: "/usr/bin/python2"
     consul_servers_group: role=control
   roles:
     - common
+    - certificates
     - lvm
     - docker
     - logrotate
@@ -44,21 +44,15 @@
   # all servers, we can skip it here to speed up the deployment.
   gather_facts: no
   vars:
-
-    ansible_python_interpreter: "/usr/bin/python2"
     mesos_mode: follower
     zookeeper_server_group: role=control
   roles:
+    # - mesos
     - dcos
-    #- mesos
     - calico
 
 - hosts: role=kubeworker
   gather_facts: yes
-  vars:
-
-    ansible_python_interpreter: "/usr/bin/python2"
-    consul_dns_domain: consul
   roles:
     - calico
     - kubernetes
@@ -78,15 +72,14 @@
     zookeeper_server_group: role=control
   roles:
     - vault
-    #- zookeeper
-    #- mesos
+    # - zookeeper
+    # - mesos
     - dcos
     - calico
     - marathon
     - mantlui
     - kubernetes
     - kubernetes-master
-    - kubernetes-addons
 
 # The edge role exists solely for routing traffic into the cluster. Firewall
 # settings should be such that web traffic (ports 80 and 443) is exposed to the
@@ -100,8 +93,6 @@
     #
     # For those migrating from haproxy, this variable serves the same purpose
     # and format as `haproxy_domain`.
-
-    ansible_python_interpreter: "/usr/bin/python2"
     traefik_marathon_domain: marathon.mesos
   roles:
     - traefik
