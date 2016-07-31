@@ -1,8 +1,14 @@
 ---
 - name: install DC/OS master
-  shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh master --disable-preflight
+  shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh master --disable-preflight --no-block-dcos-setup
   sudo: yes
   ignore_errors: yes
+  tags:
+    - dcos
+
+- name: wait until spartan configuration is present
+  wait_for: path=/opt/mesosphere/etc/spartan.json
+  sudo: yes
   tags:
     - dcos
 
@@ -30,14 +36,20 @@
   tags:
     - dcos
 
+- name: wait until adminrouter configuration is present
+  wait_for: path=/opt/mesosphere/active/adminrouter/nginx/conf/nginx.master.conf
+  sudo: yes
+  tags:
+    - dcos
+
 - name: change default HTTP port for adminrouter
-  lineinfile: dest=/opt/mesosphere/active/adminrouter/nginx/conf/nginx.conf regexp=".*listen [0-9]+ default_server;" line="        listen 8000 default_server;" state=present
+  lineinfile: dest=/opt/mesosphere/active/adminrouter/nginx/conf/nginx.master.conf regexp=".*listen [0-9]+ default_server;" line="        listen 8000 default_server;" state=present
   sudo: yes
   tags:
     - dcos
 
 - name: change default HTTPS port for adminrouter
-  lineinfile: dest=/opt/mesosphere/active/adminrouter/nginx/conf/nginx.conf regexp=".*listen [0-9]+ ssl spdy default_server;" line="        listen 8443 ssl spdy default_server;" state=present
+  lineinfile: dest=/opt/mesosphere/active/adminrouter/nginx/conf/nginx.master.conf regexp=".*listen [0-9]+ ssl spdy default_server;" line="        listen 8443 ssl spdy default_server;" state=present
   sudo: yes
   tags:
     - dcos

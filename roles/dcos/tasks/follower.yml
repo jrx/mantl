@@ -1,8 +1,14 @@
 ---
 - name: install DC/OS agent
-  shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh slave --disable-preflight
+  shell: cd /tmp/dcos-install/genconf/serve/; sudo bash dcos_install.sh slave --disable-preflight --no-block-dcos-setup
   sudo: yes
   ignore_errors: yes
+  tags:
+    - dcos
+
+- name: wait until spartan configuration is present
+  wait_for: path=/opt/mesosphere/etc/spartan.json
+  sudo: yes
   tags:
     - dcos
 
